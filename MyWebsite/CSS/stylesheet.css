@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Handjet&family=Roboto&family=Tajawal:wght@500&display=swap');
+body{
+    background-color: #0F172A;
+    color: rgb(255, 255, 255);
+    font-family: roboto,Tajawal;
+}
+header{
+    color: #ffffff;
+    border-radius: 20px;
+}
+a{
+    color: rgb(255, 255, 255);
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+nav li {
+    display: inline;
+    margin: 8px;
+    transition: 1s;
+    opacity: 0; 
+}
+
+nav a {
+    color: #0F172A;
+    transition: 1s;
+    text-decoration: none; 
+}
+
+nav ul li:first-child a {
+    text-decoration: underline;
+    color: #0F172A;
+    transition: 1s ease-in-out;
+    
+}
+
+nav a {
+    color: #ffffff;
+}
+
+nav ul li:first-child a {
+    color: #00d0ff;
+}
+
+nav img:hover + ul li {
+    opacity: 1;
+}
+nav ul li:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+nav ul li:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+nav ul li:nth-child(3) {
+    transition-delay: 0.3s;
+}
+nav{
+    display: flex;
+    justify-content:space-between;
+}
+
+  
+th{
+    text-transform: uppercase;
+}
+.top{
+    background-color: #8b2902;
+}
+em{
+    color: #22D3EE;
+}
+
+
+#articles{
+    background-color: #22D3EE;
+    text-transform: uppercase;
+    color: #000000;
+    border-radius: 20px;
+    padding: 4px;
+    margin: 4px;
+}
+
+h1,h2,h3,h4,h5{
+    text-transform: capitalize;
+}
+
+h2+p:first-letter{
+    font-size: x-large;
+}
+tr:hover{
+    background-color: #ff4b01;
+}
+
+::selection {
+    color: #00d0ff;
+}
+
+body a:hover{
+    cursor: pointer;
+}
+input{
+    height: 20px;
+}
+input[type="text"] {
+    border-color: lightgray;
+}
+  
+input[name="message"] {
+    height: 50px;
+}
+
+article{
+    background-color: #1E293B;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px
+}
+
+footer:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: rgb(0, 45, 129);
+    margin-bottom: 8px;
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    position: relative;
+    top: 100px;
+}
+div{
+    position: relative;
+    top: 100px;
+}
+footer{
+    position: relative;
+    top: 100px;
+}
+#Watermark{
+   position: relative;
+   top: -50px;
+   left: 8px;
+   opacity: 0.5;
+   color: black;
+}
+#date{
+    float: right;
+    background-color: #7371ec81;
+    text-transform: uppercase;
+    color: #000000;
+    border-radius: 20px;
+    padding: 4px;
+    margin: 4px;
+}
+#GameReviwes{
+    background-color: #ee2277;
+    text-transform: uppercase;
+    color: #000000;
+    border-radius: 20px;
+    padding: 4px;
+    margin: 4px;
+}
+img{
+    border-radius: 20px;
+}
+#welcome{
+    font-size: xx-large;
+}
+
+
+    
