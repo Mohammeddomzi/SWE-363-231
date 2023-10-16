@@ -135,8 +135,8 @@ footer:before {
 
 section{
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+    flex-direction: row;
+    justify-content:space-around;
 }
 
 main{
@@ -183,4 +183,33 @@ img{
 }
 #welcome{
     font-size: xx-large;
+}
+
+#character{
+    background-color: #dd8411;
+    text-transform: uppercase;
+    color: #000000;
+    border-radius: 20px;
+    padding: 4px;
+    margin: 4px;
+}
+
+#AnimeArticle{
+    background-color: #094f61;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px
+}
+form{
+    background-color: #1E293B;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px
+}
+canvas {
+    background-color: rgb(255, 255, 255);
+    border-radius: 24px;
+
 }
