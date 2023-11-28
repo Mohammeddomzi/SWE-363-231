@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="./stylesheet.css">
+    <link rel="stylesheet" href="./Desktop.css" media="screen and (min-width: 798px)">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+
+        h1 {
+            margin-bottom: 0px;
+        }
+
+        .cell {
+            font-family: sans-serif;
+            font-size: larger;
+            font-weight: bolder;
+            background-color: #00d0ff;
+            width: 100px;
+            height: 100px;
+            border: 4px solid white;
+            border-radius: 12px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cell:hover,#selected {
+            background-color: #16697c;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: auto auto auto;
+        }
+
+        code {
+            color: #00d0ff;
+        }
+        div{
+            position: relative;
+            top: 10px;
+        }
+        span{
+            color: #00d0ff;
+        }
+        button{
+            position: relative;
+            top: 48px;
+        }
+        button {
+  position: relative;
+  background: #444;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: none;
+  letter-spacing: 0.1rem;
+  font-size: 1rem;
+  padding: 1rem 3rem;
+  transition: 0.2s;
+}
+
+button:hover {
+  letter-spacing: 0.2rem;
+  padding: 1.1rem 3.1rem;
+  background: var(--clr);
+  color: var(--clr);
+  /* box-shadow: 0 0 35px var(--clr); */
+  animation: box 3s infinite;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #272822;
+}
+
+button span {
+  position: relative;
+  z-index: 1;
+}
+button i {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+button i::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  left: 80%;
+  top: -2px;
+  border: 2px solid var(--clr);
+  background: #272822;
+  transition: 0.2s;
+}
+
+button:hover i::before {
+  width: 15px;
+  left: 20%;
+  animation: move 3s infinite;
+}
+
+button i::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  left: 20%;
+  bottom: -2px;
+  border: 2px solid var(--clr);
+  background: #272822;
+  transition: 0.2s;
+}
+
+button:hover i::after {
+  width: 15px;
+  left: 80%;
+  animation: move 3s infinite;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes box {
+  0% {
+    box-shadow: #27272c;
+  }
+  50% {
+    box-shadow: 0 0 25px var(--clr);
+  }
+  100% {
+    box-shadow: #27272c;
+  }
+}
+
+/* the button style i took from the internet */
+
+
+
+    </style>
+</head>
+
+<body>
+    <h1 id="turn">
+        Now it's is <span>X</span> turn
+    </h1>
+    <p>Use <code>Space</code> to select & <code>Arrows</code> to move</p>
+    <!-- Board -->
+    <div class="board">
+        <div class="grid">
+            <div class="cell" id="selected"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+        </div>
+    </div>
+        <button style="--clr:#00d0ff"id="resetButton"><span>Reset</span><i></i></button>
+        <script>
+            // decided which turn is it
+            let turn = "X"
+            let gameEnded = false
+            let changeTurn = false
+
+            function checkWin(board) {
+    // Check rows
+    for (let i = 0; i < 3; i++) {
+        if (board[i][0].innerText !== "" && board[i][0].innerText === board[i][1].innerText && board[i][0].innerText === board[i][2].innerText) {
+            gameEnded = true;
+            return;
+        }
+    }
+
+    // Check columns
+    for (let i = 0; i < 3; i++) {
+        if (board[0][i].innerText !== "" && board[0][i].innerText === board[1][i].innerText && board[0][i].innerText === board[2][i].innerText) {
+            gameEnded = true;
+            return;
+        }
+    }
+
+    // Check diagonals
+    if (board[0][0].innerText !== "" && board[0][0].innerText === board[1][1].innerText && board[0][0].innerText === board[2][2].innerText) {
+        gameEnded = true;
+        return;
+    }
+
+    if (board[0][2].innerText !== "" && board[0][2].innerText === board[1][1].innerText && board[0][2].innerText === board[2][0].innerText) {
+        gameEnded = true;
+        return;
+    }
+
+    // Check for draw
+    let isDraw = true;
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (board[i][j].innerText === "") {
+                isDraw = false;
+                break;
+            }
+        }
+        if (!isDraw) break;
+    }
+
+    if (isDraw) {
+        gameEnded = false;
+        document.getElementById("turn").innerText = "draw"
+    }
+}
+            // when we click on a cell add the letter 
+            let board = document.getElementsByClassName("board")[0]
+            board.addEventListener("click", cellClicked)
+
+            function cellClicked(event) {
+                let cell = event.target
+                if (cell.innerText.includes("X")|| cell.innerText.includes("O")){
+                    changeTurn = false
+                }
+                else{
+                    cell.innerText = turn
+                    if (cell.innerText === "X") {
+                        cell.style.backgroundColor = "black";
+                    } else {
+                        cell.style.backgroundColor = "blue";
+                    }
+                    changeTurn = true
+                }
+                let CheckBoard = [
+                    [document.getElementsByClassName("cell")[0], document.getElementsByClassName("cell")[1], document.getElementsByClassName("cell")[2]],
+                    [document.getElementsByClassName("cell")[3], document.getElementsByClassName("cell")[4], document.getElementsByClassName("cell")[5]],
+                    [document.getElementsByClassName("cell")[6], document.getElementsByClassName("cell")[7], document.getElementsByClassName("cell")[8]]
+                    ];
+                
+                checkWin(CheckBoard)
+
+                if (gameEnded) {
+                    document.getElementById("turn").innerText = "the winner is " + turn
+                } else {
+                    if(changeTurn){
+                        turn = turn === "X" ? "O" : "X"
+                        //change title
+                        turnLetter = document.querySelector("#turn span")
+                        turnLetter.innerText = turn
+                    }
+
+                }
+            }
+        let resetButton = document.getElementById("resetButton");
+        resetButton.addEventListener("click", resetGame);
+
+        function resetGame() {
+            gameEnded = false;
+            let cells = document.getElementsByClassName("cell");
+            cells[0].id = 'selected'
+            cells[0].innerText = "";
+            cells[0].style.backgroundColor = "#16697c"
+            for (let i = 1; i < cells.length; i++) {
+                cells[i].innerText = "";
+                cells[i].style.backgroundColor = "#00d0ff";
+                cells[i].removeAttribute('id');
+
+            }
+
+            gameEnded = false;
+            turn = "X";
+            document.getElementById("turn").innerText = "Now it's is X turn";
+        }
+
+        document.addEventListener('keydown', handleKeyPress);
+
+function handleKeyPress(event) {
+    if (gameEnded) return; // Don't allow moves if the game has ended
+
+    let selectedCell = document.getElementById('selected');
+    let selectedCellIndex = Array.from(selectedCell.parentNode.children).indexOf(selectedCell);
+
+    switch (event.key) {
+        case 'ArrowUp':
+            if (selectedCellIndex >= 3) {
+                selectedCell.removeAttribute('id');
+                selectedCell = selectedCell.previousElementSibling;
+                selectedCell.id = 'selected';
+            }
+            break;
+        case 'ArrowDown':
+            if (selectedCellIndex < 6) {
+                selectedCell.removeAttribute('id');
+                selectedCell = selectedCell.nextElementSibling;
+                selectedCell.id = 'selected';
+            }
+            break;
+        case 'ArrowLeft':
+            if (selectedCellIndex % 3 !== 0) {
+                selectedCell.removeAttribute('id');
+                selectedCell = selectedCell.previousElementSibling;
+                selectedCell.id = 'selected';
+            }
+            break;
+        case 'ArrowRight':
+            if ((selectedCellIndex + 1) % 3 !== 0) {
+                selectedCell.removeAttribute('id');
+                selectedCell = selectedCell.nextElementSibling;
+                selectedCell.id = 'selected';
+            }
+            break;
+        case 'Enter':
+            cellClicked({ target: selectedCell });
+            break;
+        default:
+            break;
+    }
+}
+        </script>
+</body>
+
+</html>
+
